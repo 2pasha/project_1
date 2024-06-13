@@ -12,7 +12,7 @@ const createServer = () => {
   app.use('/category', express.json(), categoryRouter);
 
   app.use((req, res) => {
-    res.status(404).json({ erorr: 'Not found' });
+    res.status(404).json({ error: 'Not found' });
   });
 
   return app;
