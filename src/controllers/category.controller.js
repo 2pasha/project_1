@@ -24,6 +24,26 @@ const getOne = async (title, res) => {
   }
 };
 
+const getById = async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    res.sendStatus(400);
+
+    return;
+  }
+
+  const category = await categoryServices.getById(id);
+
+  if (!category) {
+    res.sendStatus(404);
+
+    return;
+  }
+
+  res.send(category);
+};
+
 const handleGets = async (req, res) => {
   const title = req.query.title;
 
@@ -52,9 +72,29 @@ const create = async (req, res) => {
   }
 };
 
+const remove = async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    res.sendStatus(400);
+
+    return;
+  }
+
+  if (!(await categoryServices.getById(id))) {
+    res.sendStatus(404);
+
+    return;
+  }
+
+  await categoryServices.remove(id);
+  res.sendStatus(204);
+};
+
 module.exports = {
   getAll,
   getOne,
   handleGets,
   create,
+  remove,
 };
