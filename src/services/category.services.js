@@ -14,8 +14,8 @@ const getById = async (id) => {
 
 const create = async ({ title, description }) => {
   return Category.create({
-    title: title, 
-    description: description
+    title, 
+    description
   })
 };
 

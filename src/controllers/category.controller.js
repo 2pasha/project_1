@@ -126,6 +126,7 @@ const update = async (req, res) => {
 module.exports = {
   getAll,
   getOne,
+  getById,
   handleGets,
   create,
   remove,
