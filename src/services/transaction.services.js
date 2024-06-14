@@ -28,9 +28,16 @@ const remove = async (id) => {
   await Transaction.deleteOne({ _id: id });
 };
 
+const update = async (id, updateDate) => {
+  await Transaction.findByIdAndUpdate(id, updateDate, { new: true });
+
+  return Transaction.findById(id);
+}
+
 module.exports = {
   getAll,
   getById,
   create,
   remove,
+  update,
 };

@@ -37,7 +37,6 @@ const create = async (req, res) => {
     operation_type,
     amount,
     date,
-    description
    }  = newData;
 
   if (!category || !operation_type || !amount || !date) {
@@ -74,9 +73,48 @@ const remove = async (req, res) => {
   res.sendStatus(204);
 };
 
+const update = async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    res.sendStatus(400);
+
+    return;
+  }
+
+  const newData = req.body;
+  const { 
+    category,
+    operation_type,
+    amount,
+    date,
+   }  = newData;
+
+  if (!category || !operation_type || !amount || !date) {
+    res.sendStatus(400);
+
+    return;
+  }
+
+  try {
+    const transaction = await transactionServises.getById(id);
+
+    if (!transaction) {
+      return res.sendStatus(404);
+    }
+
+    const updatedTransaction = await transactionServises.update(id, newData);
+
+    res.send(updatedTransaction);
+  } catch {
+    res.status(500).send({ error: error.message });
+  }
+};
+
 module.exports = {
   getAll,
   getById,
   create,
   remove,
+  update,
 };
