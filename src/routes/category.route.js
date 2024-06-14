@@ -5,6 +5,8 @@ const categoryController = require('../controllers/category.controller.js');
 
 router.get('/', categoryController.handleGets);
 
+router.get('/:id', categoryController.getById);
+
 router.post('/', categoryController.create);
 
 router.delete('/:id', categoryController.remove);
