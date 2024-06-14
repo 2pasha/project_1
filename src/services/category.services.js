@@ -23,10 +23,17 @@ const remove = async (id) => {
   await Category.deleteOne({ _id: id });
 };
 
+const update = async (id, updateData) => {
+  await Category.findByIdAndUpdate(id, updateData, { new: true });
+
+  return Category.findById(id); 
+};
+
 module.exports = {
   getAll,
   getOne,
   getById,
   create,
   remove,
+  update,
 };

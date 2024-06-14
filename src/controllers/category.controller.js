@@ -91,10 +91,43 @@ const remove = async (req, res) => {
   res.sendStatus(204);
 };
 
+const update = async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    res.sendStatus(400);
+
+    return;
+  }
+
+  const { title, description } = req.body;
+
+  if (!title || !description) {
+    res.sendStatus(400);
+
+    return;
+  }
+
+  try {
+    const category = await categoryServices.getById(id);
+
+    if (!category) {
+      return res.sendStatus(404);
+    }
+
+    const updatedCategory = await categoryServices.update(id, { title, description });
+    
+    res.send(updatedCategory);
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+};
+
 module.exports = {
   getAll,
   getOne,
   handleGets,
   create,
   remove,
+  update,
 };
