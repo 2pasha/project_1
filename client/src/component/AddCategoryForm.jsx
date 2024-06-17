@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import * as api from '../api/categories';
 
-export const AddCategoryForm = () => {
+
+export const AddCategoryForm = ({ onAddCategory }) => {
   const [formData, setFormData] = useState({
     title: '',
     description: ''
@@ -15,8 +17,24 @@ export const AddCategoryForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const { title, description } = formData;
+    const newCategory = { title, description };
+
+    try {
+      const addedCategory = await api.add(newCategory);
+
+      onAddCategory(addedCategory);
+      setFormData({
+        title: '',
+        description: ''
+      });
+    } catch (error) {
+      console.error('failed to add category', error);
+    }
+
 
     console.log('Submitted data:', formData);
   };

@@ -1,6 +1,9 @@
 import { TableButtons } from './TableButtons';
 
-export const CategoryTable = () => {
+export const CategoryTable = ({ categories }) => {
+
+  console.log(categories);
+
   return (
     <table className="table is-striped is-hoverable is-fullwidth is-bordered">
         <thead>
@@ -12,12 +15,14 @@ export const CategoryTable = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Food</td>
-            <td>Some text here can be</td>
-            <td><TableButtons /></td>
-          </tr>
+          {categories.map((category, index) => (
+            <tr key={category._id}>
+              <td>{index + 1}</td>
+              <td>{category.title}</td>
+              <td>{category.description}</td>
+              <td><TableButtons /></td>
+            </tr>
+          ))}
         </tbody>
       </table>
   );
