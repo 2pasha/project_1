@@ -13,3 +13,9 @@ export async function add({ title, description }) {
 
   return responce.data;
 }
+
+export async function remove({ categoryId }) {
+  const responce = await axios.delete(`/category/${categoryId}`);
+
+  return responce.statusText;
+}

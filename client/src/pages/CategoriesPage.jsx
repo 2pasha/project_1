@@ -1,23 +1,25 @@
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { AddCategoryForm } from '../component/AddCategoryForm';
 import { CategoryTable } from '../component/CategoryTable';
 import * as api from '../api/categories';
 import cn from 'classnames';
+import { fetchCategories } from '../features/categories/categoriesSlice';
 
 export const CategoriesPage = () => {
-  const [categories, setCategories] = useState([]);
+  const dispatch = useDispatch();
+  const { categories, loading, error } = useSelector(state => state.categories);
+  
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
   const [isAddingANewField, setIsAddingANewField] = useState(false);
 
-  const loadCategories = () => api.getAll().then(setCategories);
-
-  useEffect(() => {
-    loadCategories();
-  }, []);
-
-  const handleAddCategory = (newCategory) => {
-    setCategories((prevState) => [...prevState, newCategory]);
-    setIsAddingANewField(false);
-  };
+  // const handleAddCategory = (newCategory) => {
+  //   setCategories((prevState) => [...prevState, newCategory]);
+  //   setIsAddingANewField(false);
+  // };
 
   return (
     <div className="container">
@@ -25,7 +27,10 @@ export const CategoriesPage = () => {
         Categories
       </h1>
 
-      <CategoryTable categories={categories} />
+      <CategoryTable 
+        categories={categories}
+        // setCategories={setCategories}
+      />
 
       <button 
         className={cn(
@@ -38,7 +43,8 @@ export const CategoriesPage = () => {
       </button>
 
 
-      {isAddingANewField ? <AddCategoryForm onAddCategory={handleAddCategory}   /> : ''}
+      {/* {isAddingANewField ? <AddCategoryForm onAddCategory={handleAddCategory}   /> : ''} */}
+      <AddCategoryForm />
     </div>
   );
 }; 

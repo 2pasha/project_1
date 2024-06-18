@@ -1,8 +1,8 @@
 export const StatisticsPage = () => {
   return (
-    <section class="section">
-      <div class="container has-text-centered">
-        <h1 class="title">
+    <section className="section">
+      <div className="container has-text-centered">
+        <h1 className="title">
           Hello World from statistics
         </h1>
       </div>

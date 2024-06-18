@@ -1,42 +1,25 @@
 import { useState } from 'react';
-import * as api from '../api/categories';
+import { useDispatch, useSelector } from 'react-redux';
+import { addCategory } from '../features/categories/categoriesSlice';
 
 
-export const AddCategoryForm = ({ onAddCategory }) => {
-  const [formData, setFormData] = useState({
-    title: '',
-    description: ''
-  });
+export const AddCategoryForm = () => {
+  const dispatch = useDispatch();
+  // const { loading, error } = useSelector(state => state.categories);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { title, description } = formData;
-    const newCategory = { title, description };
-
     try {
-      const addedCategory = await api.add(newCategory);
-
-      onAddCategory(addedCategory);
-      setFormData({
-        title: '',
-        description: ''
-      });
+      await dispatch(addCategory({ title, description }));
+      setTitle('');
+      setDescription('');
     } catch (error) {
-      console.error('failed to add category', error);
+      console.error('Error adding category:', error);
     }
-
-
-    console.log('Submitted data:', formData);
   };
 
   return (
@@ -49,8 +32,8 @@ export const AddCategoryForm = ({ onAddCategory }) => {
             type="text" 
             placeholder="Enter new title"
             name="title"
-            value={formData.title}
-            onChange={handleChange} 
+            value={title}
+            onChange={(e) => setTitle(e.target.value)} 
           />
         </div>
       </div>
@@ -63,8 +46,8 @@ export const AddCategoryForm = ({ onAddCategory }) => {
             type="text" 
             placeholder="Enter new description"
             name="description"
-            value={formData.description}
-            onChange={handleChange}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
         </div>
       </div>
