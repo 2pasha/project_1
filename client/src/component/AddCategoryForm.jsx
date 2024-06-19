@@ -5,7 +5,6 @@ import { addCategory } from '../features/categories/categoriesSlice';
 
 export const AddCategoryForm = () => {
   const dispatch = useDispatch();
-  // const { loading, error } = useSelector(state => state.categories);
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -23,7 +22,11 @@ export const AddCategoryForm = () => {
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form 
+      className="form"
+      onSubmit={handleSubmit}
+      autoComplete='off'
+    >
       <div className="field">
         <label className="label">Title</label>
         <div className="control">

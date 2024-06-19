@@ -1,7 +1,7 @@
 import { TableButtons } from './TableButtons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchCategories } from '../features/categories/categoriesSlice';
+import { deleteCategory, fetchCategories } from '../features/categories/categoriesSlice';
 
 export const CategoryTable = () => {
   const dispatch = useDispatch();
@@ -10,6 +10,10 @@ export const CategoryTable = () => {
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
+
+  const handleDelete = (categoryId) => {
+    dispatch(deleteCategory(categoryId));
+  };
 
   return (
     <table className="table is-striped is-hoverable is-fullwidth is-bordered">
@@ -27,8 +31,7 @@ export const CategoryTable = () => {
               <td>{index + 1}</td>
               <td>{category.title}</td>
               <td>{category.description}</td>
-              {/* <td><TableButtons onDelete={() => handleDelete(category._id)} /></td> */}
-              <td><TableButtons /></td>
+              <td><TableButtons onDelete={() => handleDelete(category._id)} /></td>
             </tr>
           ))}
         </tbody>
