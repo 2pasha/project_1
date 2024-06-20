@@ -11,8 +11,6 @@ export const fetchCategories = createAsyncThunk(
   }
 );
 
-console.log(axios.get('/category').then(res => res.data));
-
 export const addCategory = createAsyncThunk(
   '/category/addCategory',
   async(newCategory) => {

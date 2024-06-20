@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { AddCategoryForm } from '../component/AddCategoryForm';
 import { CategoryTable } from '../component/CategoryTable';
 import { fetchCategories } from '../features/categories/categoriesSlice';
 
 export const CategoriesPage = () => {
   const dispatch = useDispatch();
-  const { categories, loading, error } = useSelector(state => state.categories);
 
   useEffect(() => {
     dispatch(fetchCategories());

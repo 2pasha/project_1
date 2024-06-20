@@ -36,17 +36,23 @@ export const CategoryTable = ({ editingCategory, setEditingCategory }) => {
           </tr>
         </thead>
         <tbody>
-          {categories.map((category, index) => (
-            <tr key={category._id}>
-              <td>{index + 1}</td>
-              <td>{category.title}</td>
-              <td>{category.description}</td>
-              <td><TableButtons 
-                onDelete={() => handleDelete(category._id)}
-                onEdit={() => handleEdit(category)}
-              /></td>
+          {categories.length > 0 ? (
+            categories.map((category, index) => (
+              <tr key={category._id}>
+                <td>{index + 1}</td>
+                <td>{category.title}</td>
+                <td>{category.description}</td>
+                <td><TableButtons 
+                  onDelete={() => handleDelete(category._id)}
+                  onEdit={() => handleEdit(category)}
+                /></td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="4">No data yet</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
 
