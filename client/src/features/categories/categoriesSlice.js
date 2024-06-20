@@ -38,7 +38,7 @@ export const updateCategory = createAsyncThunk(
   }
 );
 
-const cateforySlice = createSlice({
+const categorySlice = createSlice({
   name: 'category',
   initialState: {
     categories: [],
@@ -106,4 +106,4 @@ const cateforySlice = createSlice({
   }
 });
 
-export default cateforySlice.reducer;
+export default categorySlice.reducer;

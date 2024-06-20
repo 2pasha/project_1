@@ -1,14 +1,15 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { TableButtons } from './TableButtons';
+import { useEffect } from 'react';
+import { fetchTransactions } from '../features/transactions/transactionsSlice';
 
 export const TransactionTable = () => {
-  const transactions = [{
-    _id:"666beaeaaa9800b99c2986b6",
-    category:"new two",
-    operation_type:"revenues",
-    amount:600,
-    date:"2011-09-23T00:00:00.000Z",
-    description:"12345"
-  }]
+  const dispatch = useDispatch();
+  const { transactions } = useSelector(state => state.transactions);
+
+  useEffect(() => {
+    dispatch(fetchTransactions());
+  }, [dispatch]);
 
   return (
     <>
