@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addCategory } from '../features/categories/categoriesSlice';
 
 
-export const AddCategoryForm = () => {
+export const AddCategoryForm = ({ setIsAddingANewField }) => {
   const dispatch = useDispatch();
 
   const [title, setTitle] = useState('');
@@ -16,10 +16,17 @@ export const AddCategoryForm = () => {
       await dispatch(addCategory({ title, description }));
       setTitle('');
       setDescription('');
+      setIsAddingANewField(false);
     } catch (error) {
       console.error('Error adding category:', error);
     }
   };
+
+  const handleCancel = () => {
+    setTitle('');
+    setDescription('');
+    setIsAddingANewField(false);
+  }
 
   return (
     <form 
@@ -56,7 +63,14 @@ export const AddCategoryForm = () => {
       </div>
       
       <div className="control">
-        <button className="button is-primary">Submit</button>
+        <button className="button is-primary mr-4">Submit</button>
+        <button
+          className="button is-warning" 
+          type="button"
+          onClick={handleCancel}
+        >
+          Cancel
+        </button>
       </div>
     </form>
   );

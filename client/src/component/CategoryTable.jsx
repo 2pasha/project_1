@@ -1,9 +1,10 @@
 import { TableButtons } from './TableButtons';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { deleteCategory, fetchCategories } from '../features/categories/categoriesSlice';
+import { EditCategoryForm } from './EditCategoryForm';
 
-export const CategoryTable = () => {
+export const CategoryTable = ({ editingCategory, setEditingCategory }) => {
   const dispatch = useDispatch();
   const { categories, loading, error } = useSelector(state => state.categories);
 
@@ -15,8 +16,17 @@ export const CategoryTable = () => {
     dispatch(deleteCategory(categoryId));
   };
 
+  const handleEdit = (category) => {
+    setEditingCategory(category);
+  };
+
+  const handleCloseEdit = () => {
+    setEditingCategory(null);
+  };
+
   return (
-    <table className="table is-striped is-hoverable is-fullwidth is-bordered">
+    <>
+      <table className="table is-striped is-hoverable is-fullwidth is-bordered">
         <thead>
           <tr>
             <th className='has-text-centered'>№</th>
@@ -31,10 +41,18 @@ export const CategoryTable = () => {
               <td>{index + 1}</td>
               <td>{category.title}</td>
               <td>{category.description}</td>
-              <td><TableButtons onDelete={() => handleDelete(category._id)} /></td>
+              <td><TableButtons 
+                onDelete={() => handleDelete(category._id)}
+                onEdit={() => handleEdit(category)}
+              /></td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      {editingCategory && (
+        <EditCategoryForm category={editingCategory} onClose={handleCloseEdit} />
+      )}
+    </>
   );
 };

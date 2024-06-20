@@ -1,10 +1,16 @@
 export const TableButtons = ({
-  onDelete
+  onDelete,
+  onEdit
 }) => {
   return (
     <div className="field is-grouped is-grouped-centered">
       <p className="control">
-        <button className="button is-warning">Edit</button>
+        <button
+          className="button is-warning"
+          onClick={onEdit}
+        >
+          Edit
+        </button>
       </p>
       <p className="control">
         <button
