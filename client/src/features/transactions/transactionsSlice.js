@@ -18,6 +18,15 @@ export const addTransaction = createAsyncThunk(
   }
 );
 
+export const deleteTransaction = createAsyncThunk(
+  '/transaction/deleteTransaction',
+  async (transactionId) => {
+    await axios.delete(`/transaction/${transactionId}`);
+
+    return transactionId;
+  }
+);
+
 const transactionSlice = createSlice({
   name: 'transaction',
   initialState: {
@@ -49,6 +58,18 @@ const transactionSlice = createSlice({
         state.transactions.push(action.payload);
       })
       .addCase(addTransaction.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(deleteTransaction.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteTransaction.fulfilled, (state, action) => {
+        state.loading = false;
+        state.transactions = state.transactions.filter(transaction => transaction._id !== action.payload);
+      })
+      .addCase(deleteTransaction.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
