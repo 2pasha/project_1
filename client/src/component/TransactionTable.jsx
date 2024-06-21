@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { TableButtons } from './TableButtons';
 import { useEffect } from 'react';
 import { fetchTransactions } from '../features/transactions/transactionsSlice';
+import { formatDate } from '../helpers/formatDate';
 
 export const TransactionTable = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export const TransactionTable = () => {
             <th className='has-text-centered'>Category</th>
             <th className='has-text-centered'>Type</th>
             <th className='has-text-centered'>Amount</th>
+            <th className='has-text-centered'>Date</th>
             <th className='has-text-centered'>Description</th>
             <th className='has-text-centered'>Controll</th>
           </tr>
@@ -30,8 +32,9 @@ export const TransactionTable = () => {
               <tr key={transaction._id}>
                 <td>{index + 1}</td>
                 <td>{transaction.category}</td>
-                <td>{transaction.operation_type}</td>
+                <td>{transaction.operationType}</td>
                 <td>{transaction.amount}</td>
+                <td>{formatDate(transaction.date)}</td>
                 <td>{transaction.description}</td>
                 <td><TableButtons 
                   onDelete={() => {}}

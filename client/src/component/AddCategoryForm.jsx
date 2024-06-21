@@ -13,7 +13,7 @@ export const AddCategoryForm = ({ setIsAddingANewField }) => {
     e.preventDefault();
 
     try {
-      await dispatch(addCategory({ title, description }));
+      dispatch(addCategory({ title, description }));
       setTitle('');
       setDescription('');
       setIsAddingANewField(false);

@@ -9,6 +9,15 @@ export const fetchTransactions = createAsyncThunk(
   }
 );
 
+export const addTransaction = createAsyncThunk(
+  '/transaction/addTransaction',
+  async (newTransaction) => {
+    const responce = await axios.post('/transaction', newTransaction);
+
+    return responce.data;
+  }
+);
+
 const transactionSlice = createSlice({
   name: 'transaction',
   initialState: {
@@ -28,6 +37,18 @@ const transactionSlice = createSlice({
         state.transactions = action.payload;
       })
       .addCase(fetchTransactions.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(addTransaction.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addTransaction.fulfilled, (state, action) => {
+        state.loading = false;
+        state.transactions.push(action.payload);
+      })
+      .addCase(addTransaction.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
