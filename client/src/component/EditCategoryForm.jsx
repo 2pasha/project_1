@@ -1,14 +1,27 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateCategory } from '../features/categories/categoriesSlice';
+import { validateDataCategory } from '../helpers/validateDataCategories';
 
 export const EditCategoryForm = ({ category, onClose }) => {
   const dispatch =  useDispatch();
   const [title, setTitle] = useState(category.title);
   const [description, setDescription] = useState(category.description);
+  const [errorMessage, setErrorMessage] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const { isValid, errors } = validateDataCategory(
+      title,
+      description,
+    );
+
+    if (!isValid) {
+      setErrorMessage(errors);
+
+      return;
+    }
 
     try {
       dispatch(updateCategory(
@@ -33,6 +46,7 @@ export const EditCategoryForm = ({ category, onClose }) => {
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
+        {errorMessage.title && <p className="has-text-danger">{errorMessage.title}</p>}
       </div>
 
       <div className="field">
@@ -45,6 +59,7 @@ export const EditCategoryForm = ({ category, onClose }) => {
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
+        {errorMessage.description && <p className="has-text-danger">{errorMessage.description}</p>}
       </div>
       
       <div className="control">

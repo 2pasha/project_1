@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCategory } from '../features/categories/categoriesSlice';
+import { validateDataCategory } from '../helpers/validateDataCategories';
 
 
 export const AddCategoryForm = ({ setIsAddingANewField }) => {
@@ -8,10 +9,22 @@ export const AddCategoryForm = ({ setIsAddingANewField }) => {
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [errorMessage, setErrorMessage] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const { isValid, errors } = validateDataCategory(
+      title,
+      description,
+    );
+
+    if (!isValid) {
+      setErrorMessage(errors);
+
+      return;
+    }
+    
     try {
       dispatch(addCategory({ title, description }));
       setTitle('');
@@ -46,6 +59,7 @@ export const AddCategoryForm = ({ setIsAddingANewField }) => {
             onChange={(e) => setTitle(e.target.value)} 
           />
         </div>
+        {errorMessage.title && <p className="has-text-danger">{errorMessage.title}</p>}
       </div>
 
       <div className="field">
@@ -60,6 +74,7 @@ export const AddCategoryForm = ({ setIsAddingANewField }) => {
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
+        {errorMessage.description && <p className="has-text-danger">{errorMessage.description}</p>}
       </div>
       
       <div className="control">
