@@ -1,6 +1,6 @@
 import { TableButtons } from './TableButtons';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { deleteCategory, fetchCategories } from '../features/categories/categoriesSlice';
 import { EditCategoryForm } from './EditCategoryForm';
 

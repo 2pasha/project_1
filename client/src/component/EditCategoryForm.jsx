@@ -11,13 +11,13 @@ export const EditCategoryForm = ({ category, onClose }) => {
     e.preventDefault();
 
     try {
-      await dispatch(updateCategory(
+      dispatch(updateCategory(
         { id: category._id, category: { title, description } }
       ));
 
       onClose();
     } catch (err) {
-      console.error('error updating category: error');
+      console.error(`error updating category: ${err}`);
     }
   };
 

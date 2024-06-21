@@ -4,7 +4,7 @@ import { TransactionTable } from '../component/TransactionTable';
 
 export const TransactionsPage = () => {
   const [isAddingANewField, setIsAddingANewField] = useState(false);
-  const [editingTransaction, seteditingTransaction] = useState(null);
+  const [editingTransaction, setEditingTransaction] = useState(null);
 
   return (
     <div className="container">
@@ -12,7 +12,10 @@ export const TransactionsPage = () => {
         Transaction
       </h1>
 
-      <TransactionTable />
+      <TransactionTable
+        editingTransaction={editingTransaction}
+        setEditingTransaction={setEditingTransaction}
+      />
 
       {!editingTransaction && !isAddingANewField && (
         <button 

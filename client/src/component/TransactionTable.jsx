@@ -3,8 +3,9 @@ import { TableButtons } from './TableButtons';
 import { useEffect } from 'react';
 import { deleteTransaction, fetchTransactions } from '../features/transactions/transactionsSlice';
 import { formatDate } from '../helpers/formatDate';
+import { EditTransactionForm } from './EditTransactionForm';
 
-export const TransactionTable = () => {
+export const TransactionTable = ({ editingTransaction, setEditingTransaction }) => {
   const dispatch = useDispatch();
   const { transactions } = useSelector(state => state.transactions);
 
@@ -15,6 +16,14 @@ export const TransactionTable = () => {
   const handleDelete = (transactionId) => {
     dispatch(deleteTransaction(transactionId));
   };
+
+  const handleEdit = (transaction) => {
+    setEditingTransaction(transaction);
+  };
+
+  const handleCloseEdit = () => {
+    setEditingTransaction(null);
+  }
 
   return (
     <>
@@ -42,7 +51,7 @@ export const TransactionTable = () => {
                 <td>{transaction.description}</td>
                 <td><TableButtons 
                   onDelete={() => handleDelete(transaction._id)}
-                  onEdit={() => {}}
+                  onEdit={() => handleEdit(transaction)}
                 /></td>
               </tr>
             ))
@@ -54,9 +63,9 @@ export const TransactionTable = () => {
         </tbody>
       </table>
 
-      {/* {editingCategory && (
-        <EditCategoryForm category={editingCategory} onClose={handleCloseEdit} />
-      )} */}
+      {editingTransaction && (
+        <EditTransactionForm transaction={editingTransaction} onClose={handleCloseEdit} />
+      )}
     </>
   );
 };
