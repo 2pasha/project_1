@@ -2,9 +2,9 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { Helmet } from "react-helmet";
 import { CategoriesPage } from '../pages/CategoriesPage';
 import { TransactionsPage } from '../pages/TransactionsPage'
-import { StatisticsPage } from '../pages/StatisticsPage';
 import { HomePage } from '../pages/HomePage';
 import App from '../App';
+import { ReportsPage } from '../pages/ReportsPage';
 
 export const Root = () => {
   return (
@@ -20,7 +20,7 @@ export const Root = () => {
               <Route path='home' element={<Navigate to='/' replace />} />
               <Route path='category' element={<CategoriesPage />} />
               <Route path='transaction' element={<TransactionsPage />} />
-              <Route path='statistic' element={<StatisticsPage />} />
+              <Route path='report' element={<ReportsPage />} />
               <Route path='*' element={<HomePage />} />
             </Route>
           </Routes>

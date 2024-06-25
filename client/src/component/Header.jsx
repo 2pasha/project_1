@@ -7,7 +7,7 @@ export const Header = () => {
       <ul>
         <NavItem to="/category" label="Categories" />
         <NavItem to="/transaction" label="Transactions" />
-        <NavItem to="/statistic" label="Statistics" />
+        <NavItem to="/report" label="Reports" />
       </ul>
     </div>
   );

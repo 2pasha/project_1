@@ -18,8 +18,8 @@ export const HomePage = () => {
           <Link to="/transaction" className="button is-link">
             Go to Transactions
           </Link>
-          <Link className="button is-danger" disabled>
-            Go to Statistics
+          <Link to="/report" className="button is-danger">
+            Go to Reports
           </Link>
         </div>
       </div>

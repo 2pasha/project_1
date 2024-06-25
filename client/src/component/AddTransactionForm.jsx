@@ -100,7 +100,7 @@ export const AddTransactionForm = ({ setIsAddingANewField }) => {
           >
             <option value=''>Choose the operation type</option>
             <option
-              value="exprenses"
+              value="expenses"
             >
               Expenses
             </option>
