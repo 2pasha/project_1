@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// axios.defaults.baseURL = 'http://localhost:3005';
 axios.defaults.baseURL = 'https://personal-finance-rz2s.onrender.com';
 
 export const fetchCategories = createAsyncThunk(

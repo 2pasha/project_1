@@ -6,7 +6,7 @@ import { EditCategoryForm } from './EditCategoryForm';
 
 export const CategoryTable = ({ editingCategory, setEditingCategory }) => {
   const dispatch = useDispatch();
-  const { categories, loading, error } = useSelector(state => state.categories);
+  const { categories } = useSelector(state => state.categories);
 
   useEffect(() => {
     dispatch(fetchCategories());

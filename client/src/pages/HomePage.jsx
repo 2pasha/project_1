@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export const Homepage = () => {
+export const HomePage = () => {
   return (
     <section className="section">
       <div className="container has-text-centered">
@@ -8,7 +8,7 @@ export const Homepage = () => {
         <p className="subtitle">This is the home page of the application.</p>
         
         <figure className="image is-3by2" style={{ margin: '0 auto', width: '400px' }}>
-          <img src='./home_picture.jpg' alt="Home Page" />
+          <img src='./image.webp' alt="Small mem" />
         </figure>
         
         <div className="buttons is-centered" style={{ marginTop: '40px' }}>
