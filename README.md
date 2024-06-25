@@ -6,7 +6,7 @@ For database I use - Mongo DB Atlas
 
 For backend: Node JS, Express JS, Mongoose and others
 
-For frontend: React, Redux, Bulma
+For frontend: React, Redux, Bulma, Chart.js and others
 
 For frontend hosting: GitHub pages
 
