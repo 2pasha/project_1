@@ -10,17 +10,17 @@ const getById = async (id) => {
 
 const create = async ({
   category,
-  operation_type,
+  operationType,
   amount,
   date,
-  description
+  description,
 }) => {
   return Transaction.create({
     category,
-    operation_type,
+    operationType,
     amount,
     date,
-    description
+    description,
   });
 };
 
@@ -32,7 +32,7 @@ const update = async (id, updateDate) => {
   await Transaction.findByIdAndUpdate(id, updateDate, { new: true });
 
   return Transaction.findById(id);
-}
+};
 
 module.exports = {
   getAll,

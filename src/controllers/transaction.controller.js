@@ -10,7 +10,7 @@ const getAll = async (req, res) => {
   }
 };
 
-const getById = async(req, res) => {
+const getById = async (req, res) => {
   const { id } = req.params;
 
   if (!id) {
@@ -32,14 +32,9 @@ const getById = async(req, res) => {
 
 const create = async (req, res) => {
   const newData = req.body;
-  const { 
-    category,
-    operation_type,
-    amount,
-    date,
-   }  = newData;
+  const { category, operationType, amount, date } = newData;
 
-  if (!category || !operation_type || !amount || !date) {
+  if (!category || !amount || !operationType) {
     res.sendStatus(400);
 
     return;
@@ -83,14 +78,9 @@ const update = async (req, res) => {
   }
 
   const newData = req.body;
-  const { 
-    category,
-    operation_type,
-    amount,
-    date,
-   }  = newData;
+  const { category, operationType, amount, date } = newData;
 
-  if (!category || !operation_type || !amount || !date) {
+  if (!category || !operationType || !amount || !date) {
     res.sendStatus(400);
 
     return;
