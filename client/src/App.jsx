@@ -16,10 +16,12 @@ function App() {
       <Header />
         <main>
           <Routes>
-            <Route path='/home' element={<HomePage />} />
-            <Route path='/category' element={<CategoriesPage />} />
-            <Route path='/transaction' element={<TransactionsPage />} />
-            <Route path='/statistic' element={<StatisticsPage />} />
+            <Route path='/' >
+              <Route index element={<HomePage />} />
+              <Route path='/category' element={<CategoriesPage />} />
+              <Route path='/transaction' element={<TransactionsPage />} />
+              <Route path='/statistic' element={<StatisticsPage />} />
+            </Route>
           </Routes>
         </main>
     </Router>
