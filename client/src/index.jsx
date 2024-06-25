@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
 import 'bulma/css/bulma.min.css';
 import './index.css';
 import { Provider } from 'react-redux';
 import store from './app/store';
+import { Root } from './routes/AppRoute';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
-    <App />
+    <Root />
   </Provider>
 );
 
