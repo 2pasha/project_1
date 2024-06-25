@@ -4,6 +4,7 @@ import { TransactionsPage } from './pages/TransactionsPage'
 import { StatisticsPage } from './pages/StatisticsPage';
 import { Header } from './component/Header';
 import { Helmet } from "react-helmet";
+import { Homepage } from './pages/HomePage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Header />
         <main>
           <Routes>
+            <Route path='/' element={<Homepage />} />
             <Route path='/category' element={<CategoriesPage />} />
             <Route path='/transaction' element={<TransactionsPage />} />
             <Route path='/statistic' element={<StatisticsPage />} />
