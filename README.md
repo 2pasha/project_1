@@ -1,4 +1,4 @@
-# This is Personal Finance Manager
+# This is Personal Finance Manager (MERN)
 
 [DEMO LINK](https://2pasha.github.io/project_1/)
 
